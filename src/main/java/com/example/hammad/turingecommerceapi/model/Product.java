@@ -19,14 +19,16 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category_id;
-    private String category_name;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
     private Department department_id;
-    private String department_name;
 
     public Integer getProduct_id() {
         return product_id;
+    }
+
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
     }
 
     public String getName() {
@@ -97,31 +99,15 @@ public class Product {
         return category_id;
     }
 
-    public void setCategory_id(Category category) {
-        this.category_id = category;
+    public void setCategory_id(Category category_id) {
+        this.category_id = category_id;
     }
 
-    public String getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
-    }
-
-    public Department getDepartment() {
+    public Department getDepartment_id() {
         return department_id;
     }
 
-    public void setDepartment(Department department) {
-        this.department_id = department;
-    }
-
-    public String getDepartment_name() {
-        return department_name;
-    }
-
-    public void setDepartment_name(String department_name) {
-        this.department_name = department_name;
+    public void setDepartment_id(Department department_id) {
+        this.department_id = department_id;
     }
 }

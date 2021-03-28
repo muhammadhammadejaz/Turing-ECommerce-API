@@ -11,16 +11,16 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
-    @Query(value = "select category_id,name,department_id,description" +
-            "from" +
-            "Category" +
+    @Query(value = "select category_id,name,department_id,description " +
+            "from " +
+            "Category " +
             "where department_id = :department_id",nativeQuery = true)
     public List<Category> getCategoriesByDepartment(@Param("department_id") Integer department_id);
 
-    @Query(value = "select c.category_id,c.name,c.department_id " +
-            "from Category c" +
+    @Query(value = "select c.* " +
+            "from Category c " +
             "inner join " +
-            "Product p on c.category_id = p.category_id" +
+            "Product p on c.category_id = p.category_id " +
             "where p.product_id = :productId",nativeQuery = true)
     public List<Category> getCategoryByProductId(@Param("productId") Integer productId);
 }
