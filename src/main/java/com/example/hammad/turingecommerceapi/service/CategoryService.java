@@ -1,5 +1,6 @@
 package com.example.hammad.turingecommerceapi.service;
 
+import com.example.hammad.turingecommerceapi.dto.CategoryDto;
 import com.example.hammad.turingecommerceapi.model.Category;
 import com.example.hammad.turingecommerceapi.model.Department;
 import com.example.hammad.turingecommerceapi.repository.CategoryRepository;
@@ -8,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,9 +21,12 @@ public class CategoryService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    public Object[] getCategories()
+    public List<CategoryDto> getCategories()
     {
-        return categoryRepository.findAll().toArray();
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAll();
+        categories.forEach(category -> categoryDtos.add(CategoryDto.convertToDto(category)));
+        return categoryDtos;
     }
 
     public Category addCategory(Category category,Integer deptId)
@@ -31,22 +37,27 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category getCategoryById(Integer Id)
+    public CategoryDto getCategoryById(Integer Id)
     {
         Category category = categoryRepository.findById(Id).get();
-        return category;
+        CategoryDto categoryDto = CategoryDto.convertToDto(category);
+        return categoryDto;
     }
 
-    public Object[] getCategoryByProductId(Integer id)
+    public List<CategoryDto> getCategoryByProductId(Integer id)
     {
-        Object[] arr = categoryRepository.getCategoryByProductId(id).toArray();
-
-        return arr;
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        List<Category> categories = categoryRepository.getCategoryByProductId(id);
+        categories.forEach(category -> categoryDtos.add(CategoryDto.convertToDto(category)));
+        return categoryDtos;
     }
 
-    public Object[] getCategoryByDepartmentId(Integer id)
+    public List<CategoryDto> getCategoryByDepartmentId(Integer id)
     {
-        return categoryRepository.getCategoriesByDepartment(id).toArray();
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        List<Category> categories = categoryRepository.getCategoriesByDepartment(id);
+        categories.forEach(category -> categoryDtos.add(CategoryDto.convertToDto(category)));
+        return categoryDtos;
     }
 
 }
