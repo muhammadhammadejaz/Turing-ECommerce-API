@@ -1,11 +1,14 @@
 package com.example.hammad.turingecommerceapi.controller;
 
+import com.example.hammad.turingecommerceapi.dto.DepartmentDto;
 import com.example.hammad.turingecommerceapi.model.Department;
 import com.example.hammad.turingecommerceapi.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/departments")
@@ -25,14 +28,14 @@ public class DepartmentController {
     @GetMapping("/")
     public ResponseEntity<?> getDepartments()
     {
-        Object[] departments = departmentService.getAllDepartments();
-        return new ResponseEntity<>(departments,HttpStatus.OK);
+        List<DepartmentDto> departmentDtoList = departmentService.getAllDepartments();
+        return new ResponseEntity<>(departmentDtoList,HttpStatus.OK);
     }
 
     @GetMapping("/{department_id}")
     public ResponseEntity<?> getDepartmentById(@PathVariable Integer department_id)
     {
-        Department department = departmentService.getDepartmentById(department_id);
+        DepartmentDto department = departmentService.getDepartmentById(department_id);
         return new ResponseEntity<>(department,HttpStatus.OK);
     }
 }
