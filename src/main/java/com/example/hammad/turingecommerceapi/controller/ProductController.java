@@ -20,4 +20,9 @@ public class ProductController {
         Product prod = productService.addProduct(product,catId,deptId);
         return new ResponseEntity<>(prod, HttpStatus.OK);
     }
+
+    public ResponseEntity<?> getProducts(@PathVariable Integer page,@PathVariable Integer size)
+    {
+
+    }
 }
