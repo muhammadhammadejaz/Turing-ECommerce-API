@@ -6,6 +6,7 @@ import com.example.hammad.turingecommerceapi.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Transactional
     public Department addDepartment(Department department)
     {
         return departmentRepository.save(department);
